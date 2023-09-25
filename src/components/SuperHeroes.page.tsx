@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-interface Hero {
-    id: number,
-    name: string,
-    alterEgo: string,
-}
 export const SuperHeroesPage = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState([])
