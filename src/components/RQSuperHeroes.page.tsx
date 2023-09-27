@@ -11,7 +11,9 @@ const fetchSuperHeroes = async (): Promise<Hero[]> => {
     return res.data;
 }
 export const RQSuperHeroesPage = () => {
-    const {isLoading, data, isError, error} = useQuery<Hero[], AxiosError>(['super-heroes'], fetchSuperHeroes);
+    const {isLoading, data, isError, error, isFetching} = useQuery<Hero[], AxiosError>(
+        ['super-heroes'], fetchSuperHeroes, {cacheTime: 5000});
+    console.log({isLoading, isFetching});
     if(isLoading) {
         return <h2>Loading...</h2>
     }
