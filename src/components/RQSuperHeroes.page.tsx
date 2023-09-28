@@ -11,11 +11,20 @@ const fetchSuperHeroes = async (): Promise<Hero[]> => {
     return res.data;
 }
 export const RQSuperHeroesPage = () => {
+    const onSuccess = (data: Hero[]) => {
+        console.log('Perform side effect after data fetching', data);
+    }
+
+    const onError = (error: any) => {
+        console.log('Perform side effect when encountering error', error);
+    }
+
     const {isLoading, data, isError, error, isFetching, refetch} = useQuery<Hero[], AxiosError>(
         ['super-heroes'],
         fetchSuperHeroes,
         {
-            enabled: false,
+            onSuccess: onSuccess,
+            onError: onError,
         });
     console.log({isLoading, isFetching});
     return (
