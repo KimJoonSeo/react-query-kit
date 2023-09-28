@@ -1,6 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
 import axios, {AxiosError} from "axios";
-import {useState} from "react";
 
 interface Hero {
     id: number,
@@ -12,7 +11,7 @@ const fetchSuperHeroes = async (): Promise<Hero[]> => {
     return res.data;
 }
 export const RQSuperHeroesPage = () => {
-    const {isLoading, data, isError, error, isFetching, refetch} = useQuery<Hero[], AxiosError>(
+    const {isLoading, data, isError, error} = useQuery<Hero[], AxiosError>(
         ['super-heroes'],
         fetchSuperHeroes,
         {
