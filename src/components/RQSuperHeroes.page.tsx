@@ -12,24 +12,11 @@ const fetchSuperHeroes = async (): Promise<Hero[]> => {
     return res.data;
 }
 export const RQSuperHeroesPage = () => {
-    const [refetchInterval, setRefetchInterval] = useState(3000);
-    const onSuccess = (data: Hero[]) => {
-        if(data.length >= 4) setRefetchInterval(0);
-    }
-
-    const onError = (error: any) => {
-        setRefetchInterval(0);
-    }
-
     const {isLoading, data, isError, error, isFetching, refetch} = useQuery<Hero[], AxiosError>(
         ['super-heroes'],
         fetchSuperHeroes,
         {
-            onSuccess: onSuccess,
-            onError: onError,
-            refetchInterval: refetchInterval === 0 ? false : refetchInterval,
-            refetchIntervalInBackground: true,
-
+            select: (data: Hero[]) => data.filter(hero => hero.name.length < 10)
         });
     return (
         <>
@@ -38,16 +25,10 @@ export const RQSuperHeroesPage = () => {
             {(isLoading) && <h2>Loading...</h2>}
             {isError && <h2>{error?.message}</h2>}
             {
-                data?.map((hero) => {
+                data?.map((hero: Hero) => {
                     return <div key={hero.name}>{hero.name}</div>
                 })
             }
         </>
     )
 }
-
-
-// refeth data every 3 seconds
-// db에 네번째 히어로를 넣기
-// onsuccess 함수에서 히어로가 네명이면 폴링을 멈춘다.
-// 에러가 발생하면 폴링을 멈춘다.
