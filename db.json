@@ -12,8 +12,13 @@
     },
     {
       "id": 3,
-      "name": "Wonder Woman1",
+      "name": "Wonder Woman",
       "alterEgo": "Princess Diana"
+    },
+    {
+      "id": 4,
+      "name": "The King",
+      "alterEgo": "Lebron James"
     }
   ]
 }

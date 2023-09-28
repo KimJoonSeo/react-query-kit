@@ -4,10 +4,17 @@ import { HomePage } from './components/Home.page'
 import { RQSuperHeroesPage } from './components/RQSuperHeroes.page'
 import { SuperHeroesPage } from './components/SuperHeroes.page'
 import React from "react";
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import {QueryClient, QueryClientConfig, QueryClientProvider} from '@tanstack/react-query'
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 
-const queryClient = new QueryClient();
+const options: QueryClientConfig = {
+  defaultOptions: {
+    queries: {
+      networkMode: 'always',
+    }
+  }
+}
+const queryClient = new QueryClient(options);
 function App() {
 
   return (
