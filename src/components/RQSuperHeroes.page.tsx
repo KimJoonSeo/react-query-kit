@@ -11,23 +11,19 @@ const fetchSuperHeroes = async (): Promise<Hero[]> => {
     return res.data;
 }
 export const RQSuperHeroesPage = () => {
-    const {isLoading, data, isError, error, isFetching} = useQuery<Hero[], AxiosError>(
+    const {isLoading, data, isError, error, isFetching, refetch} = useQuery<Hero[], AxiosError>(
         ['super-heroes'],
         fetchSuperHeroes,
         {
-            refetchInterval: 2000,
-            refetchIntervalInBackground: true,
+            enabled: false,
         });
     console.log({isLoading, isFetching});
-    if(isLoading) {
-        return <h2>Loading...</h2>
-    }
-    if(isError) {
-        return <h2>{error?.message}</h2>
-    }
     return (
         <>
             <h2>RQ Super Heroes Page</h2>
+            <button onClick={() => refetch()}>Fetch heroes</button>
+            {(isLoading || isFetching) && <h2>Loading...</h2>}
+            {isError && <h2>{error?.message}</h2>}
             {
                 data?.map((hero) => {
                     return <div key={hero.name}>{hero.name}</div>
