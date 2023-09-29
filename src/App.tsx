@@ -8,6 +8,7 @@ import {QueryClient, QueryClientConfig, QueryClientProvider} from '@tanstack/rea
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import {RQSuperHeroPage} from "./components/RQSuperHero.page";
 import ParallelQueriesPage from "./components/ParallelQueries.page";
+import {DynamicParallelPage} from "./components/DynamicParallel.page";
 
 const options: QueryClientConfig = {
   defaultOptions: {
@@ -42,6 +43,7 @@ function App() {
               <Route path='/' element={<HomePage />} />
               <Route path={'/rq-super-heroes/:heroId'} element={<RQSuperHeroPage />} />
               <Route path={'/rq-parallel'} element={<ParallelQueriesPage />} />
+              <Route path={'/rq-dynamic-parallel'} element={<DynamicParallelPage heroIds={['1', '2']} />} />
             </Routes>
           </div>
         </Router>
