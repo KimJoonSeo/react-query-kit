@@ -1,22 +1,13 @@
-import {useQuery} from "@tanstack/react-query";
-import axios, {AxiosError} from "axios";
+import useSuperHeroesData from "../hooks/useSuperHeroesData";
 
-interface Hero {
+export interface Hero {
     id: number,
     name: string,
     alterEgo: string,
 }
-const fetchSuperHeroes = async (): Promise<Hero[]> => {
-    const res = await axios.get('http://localhost:4000/superheroes');
-    return res.data;
-}
 export const RQSuperHeroesPage = () => {
-    const {isLoading, data, isError, error} = useQuery<Hero[], AxiosError>(
-        ['super-heroes'],
-        fetchSuperHeroes,
-        {
-            select: (data: Hero[]) => data.filter(hero => hero.name.length < 10)
-        });
+    const {isLoading, data, isError, error} =
+        useSuperHeroesData();
     return (
         <>
             <h2>RQ Super Heroes Page</h2>
