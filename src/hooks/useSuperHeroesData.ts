@@ -10,9 +10,6 @@ const fetchSuperHeroes = async (): Promise<Hero[]> => {
 const useSuperHeroesData = () => useQuery<Hero[], AxiosError>(
     ['super-heroes'],
     fetchSuperHeroes,
-    {
-        select: (data: Hero[]) => data.filter(hero => hero.name.length < 10)
-    }
 );
 
 export default useSuperHeroesData;
