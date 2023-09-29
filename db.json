@@ -20,5 +20,19 @@
       "name": "The King",
       "alterEgo": "Lebron James"
     }
+  ],
+  "friends": [
+    {
+      "id": 1,
+      "name": "Chandler Bing"
+    },
+    {
+      "id": 2,
+      "name": "Joey Tribbiani"
+    },
+    {
+      "id": 1,
+      "name": "Rachel Green"
+    }
   ]
 }
