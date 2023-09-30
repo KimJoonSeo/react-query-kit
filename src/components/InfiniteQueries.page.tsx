@@ -1,6 +1,6 @@
 import axios, {AxiosError} from "axios";
-import {useInfiniteQuery, useQuery} from "@tanstack/react-query";
-import {Fragment, useState} from "react";
+import {useInfiniteQuery} from "@tanstack/react-query";
+import {Fragment} from "react";
 
 export interface Color {
     id: number,
