@@ -12,7 +12,7 @@ export const RQSuperHeroesPage = () => {
     const [alterEgo, setAlterEgo] = useState('');
     const {isLoading, data, isError, error} =
         useSuperHeroesData();
-    const {mutate: addHero, isLoading: isLoadingInMutation, isError: isErrorInMutation, error: errorInMutation} = useAddSuperHeroData();
+    const {mutate: addHero} = useAddSuperHeroData();
     const handleAddHeroClick = () => {
         const hero: Hero = {name, alterEgo};
         addHero(hero);
@@ -31,8 +31,8 @@ export const RQSuperHeroesPage = () => {
                     onChange={e => setAlterEgo(e.target.value)} />
                 <button onClick={handleAddHeroClick}>Add Hero</button>
             </div>
-            {(isLoading || isLoadingInMutation) && <h2>Loading...</h2>}
-            {(isError || isErrorInMutation) && <h2>{error?.message}{errorInMutation?.message}</h2>}
+            {(isLoading) && <h2>Loading...</h2>}
+            {(isError) && <h2>{error?.message}</h2>}
             {
                 data?.map((hero: Hero) => {
                     return <div key={hero.id}>

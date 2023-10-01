@@ -8,7 +8,7 @@ export const fetchSuperHeroes = async (): Promise<Hero[]> => {
 }
 
 const addSuperHero = async (hero: Hero): Promise<Hero> => {
-    const rs = await axios.post('http://localhost:4000/superheroes', hero);
+    const rs = await axios.post('http://localhost:4000/superheroes1', hero);
     return rs.data;
 }
 const useSuperHeroesData = () => useQuery<Hero[], AxiosError>(
@@ -19,14 +19,34 @@ const useSuperHeroesData = () => useQuery<Hero[], AxiosError>(
 export const useAddSuperHeroData = () => {
     const queryClient = useQueryClient();
     return useMutation<Hero, AxiosError, Hero>(addSuperHero, {
-        onSuccess: (data) => {
-            // queryClient.invalidateQueries(['super-heroes']);
+        // onSuccess: (data) => {
+        //     // queryClient.invalidateQueries(['super-heroes']);
+        //     const allHeroes: Hero[] | undefined = queryClient.getQueryData(['super-heroes']);
+        //     if(allHeroes) {
+        //         allHeroes.push(data);
+        //     }
+        //     queryClient.setQueryData(['super-heroes'], allHeroes === undefined ? [data] : allHeroes)
+        // }
+        onMutate: async (data: Hero) => {
+            await queryClient.cancelQueries(['super-heroes']);
             const allHeroes: Hero[] | undefined = queryClient.getQueryData(['super-heroes']);
             if(allHeroes) {
                 allHeroes.push(data);
             }
             queryClient.setQueryData(['super-heroes'], allHeroes === undefined ? [data] : allHeroes)
+            return allHeroes
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries(['super-heroes']);
+        },
+        onError: (_error, _variables, _context) => {
+            const allHeroes: Hero[] | undefined = queryClient.getQueryData(['super-heroes']);
+            if(allHeroes) {
+                allHeroes.pop();
+            }
+            queryClient.setQueryData(['super-heroes'], allHeroes);
         }
+
     });
 }
 export default useSuperHeroesData;
