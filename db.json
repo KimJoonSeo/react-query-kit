@@ -19,6 +19,16 @@
       "id": 4,
       "name": "The King",
       "alterEgo": "Lebron James"
+    },
+    {
+      "name": "Flash",
+      "alterEgo": "Dominq Wilson",
+      "id": 5
+    },
+    {
+      "name": "Sonny",
+      "alterEgo": "Son Heung Min",
+      "id": 6
     }
   ],
   "friends": [
@@ -44,7 +54,11 @@
   "channels": [
     {
       "id": "codevolution",
-      "courses": ["react", "vue", "angular"]
+      "courses": [
+        "react",
+        "vue",
+        "angular"
+      ]
     }
   ],
   "colors": [
