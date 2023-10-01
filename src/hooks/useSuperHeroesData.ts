@@ -19,8 +19,13 @@ const useSuperHeroesData = () => useQuery<Hero[], AxiosError>(
 export const useAddSuperHeroData = () => {
     const queryClient = useQueryClient();
     return useMutation<Hero, AxiosError, Hero>(addSuperHero, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(['super-heroes']);
+        onSuccess: (data) => {
+            // queryClient.invalidateQueries(['super-heroes']);
+            const allHeroes: Hero[] | undefined = queryClient.getQueryData(['super-heroes']);
+            if(allHeroes) {
+                allHeroes.push(data);
+            }
+            queryClient.setQueryData(['super-heroes'], allHeroes === undefined ? [data] : allHeroes)
         }
     });
 }
