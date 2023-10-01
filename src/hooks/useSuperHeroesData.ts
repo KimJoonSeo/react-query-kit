@@ -1,4 +1,4 @@
-import {useMutation, useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import axios, {AxiosError} from "axios";
 import {Hero} from "../components/RQSuperHeroes.page";
 
@@ -17,6 +17,11 @@ const useSuperHeroesData = () => useQuery<Hero[], AxiosError>(
 );
 
 export const useAddSuperHeroData = () => {
-    return useMutation<Hero, AxiosError, Hero>(addSuperHero);
+    const queryClient = useQueryClient();
+    return useMutation<Hero, AxiosError, Hero>(addSuperHero, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['super-heroes']);
+        }
+    });
 }
 export default useSuperHeroesData;

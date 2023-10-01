@@ -29,6 +29,21 @@
       "name": "Sonny",
       "alterEgo": "Son Heung Min",
       "id": 6
+    },
+    {
+      "name": "Hulk",
+      "alterEgo": "Ha yunki",
+      "id": 7
+    },
+    {
+      "name": "DEF",
+      "alterEgo": "wleox",
+      "id": 8
+    },
+    {
+      "name": "DEFs",
+      "alterEgo": "wleoxqe",
+      "id": 9
     }
   ],
   "friends": [
